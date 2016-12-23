@@ -12,10 +12,9 @@
 
       properties:
       {
-        event:
+        on:
         {
-          type: Boolean,
-          value: false
+          type: String
         },
         socket:
         {
@@ -33,7 +32,7 @@
 
         this.socket = parent.socket; // TODO: recursive parent Searching
 
-        this.socket.on(this.event, (data) =>
+        this.socket.on(this.on, (data) =>
         {
           this.data = data;
           this.fire("received", data);
