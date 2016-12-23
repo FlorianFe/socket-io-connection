@@ -1,0 +1,42 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="socket-io-receiver">
+  <template>
+
+  </template>
+
+  <script>
+    Polymer(
+    {
+      is: 'socket-io-receiver',
+
+      properties:
+      {
+        event:
+        {
+          type: Boolean,
+          value: false
+        },
+        socket:
+        {
+          type: Object
+        },
+        data:
+        {
+          type: String,
+          notify: true
+        }
+      },
+      ready: function()
+      {
+        this.socket = this.parentNode.socket; // TODO: recursive parent Searching
+
+        this.socket.on(this.event, (data) =>
+        {
+          this.data = data;
+          this.fire("received", data);
+        });
+      }
+    });
+  </script>
+</dom-module>

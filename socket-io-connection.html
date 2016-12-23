@@ -1,0 +1,64 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="socket-io-emitter.html">
+<link rel="import" href="socket-io-receiver.html">
+
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+<!--
+`socket-io-connection`
+Declarative Adapter for clientside socket.io connections
+
+@demo demo/index.html
+-->
+
+<dom-module id="socket-io-connection">
+  <template>
+
+  </template>
+
+  <script>
+    Polymer(
+    {
+      is: 'socket-io-connection',
+
+      properties:
+      {
+        auto:
+        {
+          type: Boolean,
+          value: false
+        },
+        url:
+        {
+          type: String
+        },
+        socket:
+        {
+          type: Object
+        },
+        connected:
+        {
+          type: Boolean,
+          value: false
+        }
+      },
+      ready: function()
+      {
+        if(this.auto) this.connect();
+      },
+      connect: function()
+      {
+        try
+        {
+          this.socket = io();
+          this.fire("connected", {});
+        }
+        catch (e)
+        {
+          console.error(e);
+          this.fire("error", e);
+        }
+      }
+    });
+  </script>
+</dom-module>

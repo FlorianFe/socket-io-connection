@@ -1,0 +1,59 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="socket-io-emitter">
+  <template>
+
+  </template>
+
+  <script>
+    Polymer(
+    {
+      is: 'socket-io-emitter',
+
+      properties:
+      {
+        auto:
+        {
+          type: Boolean,
+          value: false
+        },
+        event:
+        {
+          type: String
+        },
+        socket:
+        {
+          type: Object
+        },
+        value:
+        {
+          type: String,
+          observer: "_onValueChange"
+        }
+      },
+      ready: function()
+      {
+        this.socket = this.parentNode.socket; // TODO: recursive parent Searching
+      },
+      emit: function(explicitValue)
+      {
+        try
+        {
+          (explicitValue) ?
+            this.socket.emit(this.event, explicitValue) :
+            this.socket.emit(this.event, this.value);
+
+          this.fire("emitted", {});
+        }
+        catch (e)
+        {
+          this.fire("error", e);
+        }
+      },
+      _onValueChange: function()
+      {
+        if(auto) this.emit();
+      }
+    });
+  </script>
+</dom-module>
