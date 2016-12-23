@@ -33,7 +33,10 @@
       },
       ready: function()
       {
-        this.socket = this.parentNode.socket; // TODO: recursive parent Searching
+        this.parentNode.addEventListener("ready", () =>
+        {
+            this.socket = this.parentNode.socket; // TODO: recursive parent Searching
+        });
       },
       emit: function(explicitValue)
       {

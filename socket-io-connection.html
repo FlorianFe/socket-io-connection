@@ -44,6 +44,7 @@ Declarative Adapter for clientside socket.io connections
       },
       ready: function()
       {
+        this.fire("ready", {});
         if(this.auto) this.connect();
       },
       connect: function()

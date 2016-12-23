@@ -29,12 +29,15 @@
       },
       ready: function()
       {
-        this.socket = this.parentNode.socket; // TODO: recursive parent Searching
-
-        this.socket.on(this.event, (data) =>
+        this.parentNode.addEventListener("ready", () =>
         {
-          this.data = data;
-          this.fire("received", data);
+          this.socket = this.parentNode.socket; // TODO: recursive parent Searching
+
+          this.socket.on(this.event, (data) =>
+          {
+            this.data = data;
+            this.fire("received", data);
+          });
         });
       }
     });
