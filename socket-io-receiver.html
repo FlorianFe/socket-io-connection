@@ -29,9 +29,11 @@
       },
       ready: function()
       {
-        this.parentNode.addEventListener("ready", () =>
+        let parent = Polymer.dom(this).parentNode;
+
+        parent.addEventListener("ready", () =>
         {
-          this.socket = this.parentNode.socket; // TODO: recursive parent Searching
+          this.socket = parent.socket; // TODO: recursive parent Searching
 
           this.socket.on(this.event, (data) =>
           {
