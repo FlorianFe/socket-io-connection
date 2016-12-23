@@ -31,15 +31,12 @@
       {
         let parent = Polymer.dom(this).parentNode;
 
-        parent.addEventListener("ready", () =>
-        {
-          this.socket = parent.socket; // TODO: recursive parent Searching
+        this.socket = parent.socket; // TODO: recursive parent Searching
 
-          this.socket.on(this.event, (data) =>
-          {
-            this.data = data;
-            this.fire("received", data);
-          });
+        this.socket.on(this.event, (data) =>
+        {
+          this.data = data;
+          this.fire("received", data);
         });
       }
     });
