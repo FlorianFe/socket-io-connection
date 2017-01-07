@@ -44,15 +44,19 @@ Declarative Adapter for clientside socket.io connections
       },
       ready: function()
       {
-        this.fire("ready", {});
         if(this.auto) this.connect();
       },
       connect: function()
       {
         try
         {
-          this.socket = io();
-          this.fire("connected", {});
+          this.socket = io(this.url);
+
+          this.socket.on('connect', () =>
+          {
+            this.fire("connected", {socket: this.socket});
+            this.connected = true;
+          });
         }
         catch (e)
         {

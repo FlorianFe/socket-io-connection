@@ -18,7 +18,8 @@
         },
         socket:
         {
-          type: Object
+          type: Object,
+          observer: "_onSocketSet"
         },
         data:
         {
@@ -26,12 +27,8 @@
           notify: true
         }
       },
-      ready: function()
+      _onSocketSet: function()
       {
-        let parent = Polymer.dom(this).parentNode;
-
-        this.socket = parent.socket; // TODO: recursive parent Searching
-
         this.socket.on(this.on, (data) =>
         {
           this.data = data;

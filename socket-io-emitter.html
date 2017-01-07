@@ -31,11 +31,6 @@
           observer: "_onValueChange"
         }
       },
-      ready: function()
-      {
-        let parent = Polymer.dom(this).parentNode;
-        this.socket = parent.socket; // TODO: recursive parent Searching
-      },
       emit: function(explicitValue)
       {
         try
